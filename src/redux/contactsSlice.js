@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const initialState = {
+  // items: [],
   items: [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -15,7 +16,6 @@ const initialState = {
 const contactsSlice = createSlice({
   name: 'phonebook',
   initialState,
-  // initialSt: { items: 0, filter: '' },
   reducers: {
     //   {payload} - action.payload
     addContacts(state, { payload }) {
@@ -92,3 +92,16 @@ export const getFilterValue = state => state.phonebook.filter;
 //       name.toLowerCase().includes(normalizedFilter)
 //     );
 //   };
+//----------------------LocalStorage ---------
+// const useLocalStorage = (key, defaultValue) => {
+//   const [state, setState] = useState(() => {
+//     return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;
+//   });
+
+//   useEffect(() => {
+//     // console.log('useName');
+//     window.localStorage.setItem(key, JSON.stringify(state));
+//   }, [key, state]);
+
+//   return [state, setState];
+// };

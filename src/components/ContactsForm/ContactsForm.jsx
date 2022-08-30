@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContacts, getContactsList } from 'redux/contactsSlice';
 import { nanoid } from 'nanoid';
 import { Input, WrapperForm, Label, Button } from './ContactsForm.styled';
 
-export function ContactsForm({ onSubmit }) {
+export function ContactsForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const dispatch = useDispatch();
+  const items = useSelector(getContactsList);
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -32,7 +36,17 @@ export function ContactsForm({ onSubmit }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number });
+    const normalizedName = name.toLowerCase();
+
+    const duplicate = items.find(
+      item => item.name.toLowerCase() === normalizedName
+    );
+
+    if (duplicate) {
+      alert(`${name} is already in contacts.`);
+    } else {
+      dispatch(addContacts({ name, number }));
+    }
     reset();
   };
 
@@ -75,6 +89,16 @@ export function ContactsForm({ onSubmit }) {
   );
 }
 
-ContactsForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+//----------------------  duplicate  -------App--------------------
+// const normalizedName = name.toLowerCase();
+
+//     const duplicate = contacts.find(
+//       // ({ name }) => name.toLowerCase() === normalizedName
+//       contact => contact.name.toLowerCase() === normalizedName
+//     );
+
+//     if (duplicate) {
+//       alert(`${name} is already in contacts.`);
+//     } else {
+//       setContacts(prevState => [contact, ...prevState]);
+//     }

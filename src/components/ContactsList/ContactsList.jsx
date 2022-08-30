@@ -35,18 +35,7 @@ export const ContactsList = () => {
 //       number,
 //     };
 
-//     const normalizedName = name.toLowerCase();
-
-//     const duplicate = contacts.find(
-//       // ({ name }) => name.toLowerCase() === normalizedName
-//       contact => contact.name.toLowerCase() === normalizedName
-//     );
-
-//     if (duplicate) {
-//       alert(`${name} is already in contacts.`);
-//     } else {
-//       setContacts(prevState => [contact, ...prevState]);
-//     }
+//   
 //   };
 
 //   ----------------------- ContactListItem.jsx  ----------------
