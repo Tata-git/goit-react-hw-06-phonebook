@@ -1,19 +1,35 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getContactsList, deleteContacts } from 'redux/contactsSlice';
+import {
+  getContactsList,
+  deleteContacts,
+  getFilterValue,
+} from 'redux/contactsSlice';
 import { ContactList, Item, Contact, Button } from './ContactList.styled';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
 
   const items = useSelector(getContactsList);
+  const filter = useSelector(getFilterValue);
+  //------------ filter ------------------------
+  const findQuery = items.filter(({ name }) =>
+    name.toLowerCase().includes(filter.toLowerCase())
+  );
+  const findContacts = filter ? findQuery : items;
+  //------------- delete -------------------
+  const handleDeleteContact = contactId => {
+    console.log(contactId); // undefined
+
+    dispatch(deleteContacts(contactId));
+  };
 
   return (
     <ContactList>
-      {items.map(({ id, name, number }) => (
+      {findContacts.map(({ id, name, number }) => (
         <Item key={id}>
           <Contact>{name}: </Contact>
           <Contact>{number} </Contact>
-          <Button type="button" onClick={() => dispatch(deleteContacts(id))}>
+          <Button type="button" onClick={() => handleDeleteContact()}>
             Delete
           </Button>
         </Item>
@@ -35,9 +51,14 @@ export const ContactsList = () => {
 //       number,
 //     };
 
-//   
+//
 //   };
+//----------------------delete----------------------
 
+// const deleteContact = contactId => {
+//   console.log(contactId);
+//   setContacts(prevState => prevState.filter(({ id }) => id !== contactId));
+// };
 //   ----------------------- ContactListItem.jsx  ----------------
 // import { Contact, Item, Button } from './ContactListItem.styled';
 
@@ -52,5 +73,3 @@ export const ContactsList = () => {
 //     </Item>
 //   );
 // };
-
-
