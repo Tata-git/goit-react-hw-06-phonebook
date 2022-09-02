@@ -45,7 +45,7 @@ export function ContactsForm() {
     if (duplicate) {
       alert(`${name} is already in contacts.`);
     } else {
-      dispatch(addContacts({ name, number }));
+      dispatch(addContacts({ name, number,id: nanoid() }));
     }
     reset();
   };
@@ -56,7 +56,6 @@ export function ContactsForm() {
         <Label htmlFor="name">Name</Label>
         <div>
           <Input
-            id={nanoid()}
             onChange={handleChange}
             value={name}
             name="name"
@@ -71,7 +70,6 @@ export function ContactsForm() {
           <Label htmlFor="number">Number</Label>
           <div>
             <Input
-              id={nanoid()}
               onChange={handleChange}
               value={number}
               name="number"

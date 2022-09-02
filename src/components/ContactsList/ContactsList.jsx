@@ -18,7 +18,7 @@ export const ContactsList = () => {
   const findContacts = filter ? findQuery : items;
   //------------- delete -------------------
   const handleDeleteContact = contactId => {
-    console.log(contactId); // undefined
+    console.log(contactId); 
 
     dispatch(deleteContacts(contactId));
   };
@@ -29,7 +29,7 @@ export const ContactsList = () => {
         <Item key={id}>
           <Contact>{name}: </Contact>
           <Contact>{number} </Contact>
-          <Button type="button" onClick={() => handleDeleteContact()}>
+          <Button type="button" onClick={() => handleDeleteContact(id)}>
             Delete
           </Button>
         </Item>
